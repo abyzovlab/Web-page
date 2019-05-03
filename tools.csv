@@ -1,0 +1,5 @@
+CNVnator;abyzovlab/CNVnator;A tool for CNV discovery and genotyping from depth of read mapping.;http://www.ncbi.nlm.nih.gov/pubmed/21293372;
+AGE;abyzovlab/AGE;A tool that implements an algorithm for optimal alignment of sequences with SVs.;http://www.ncbi.nlm.nih.gov/pubmed/21233167';
+Leucippus;abyzovlab/Leucippus;A tool for confirmation of mosaic variants from targeted sequencing.;https://www.ncbi.nlm.nih.gov/pubmed/28235832;
+vcf2diploid;abyzovlab/vcf2diploid;Personal genome constructor, it can be used to construct a personal diploid genome sequence by including personal variants into reference genome.;http://www.ncbi.nlm.nih.gov/pubmed/21811232;
+Belka;;A software that implements RigidFinder, a method to detect protein rigid blocks from two different conformations.<br><br>Download <a href="http://belka.molmovdb.org/Belka_v0.1.zip"><b><u>Belka v0.1</u></b></a>;http://www.ncbi.nlm.nih.gov/pubmed/19705487;
