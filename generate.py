@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import csv
 
 temp=open("template.html").read()
