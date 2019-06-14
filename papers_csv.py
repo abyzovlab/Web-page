@@ -24,6 +24,7 @@ class MyNCBI:
 
     def scrap_myncbi(self, cid):
         self.myncbi.get("http://www.ncbi.nlm.nih.gov/sites/myncbi/browse/collection/{cid}/?sort=date&direction=ascending".format(cid=cid))
+#        self.myncbi.get("https://www.ncbi.nlm.nih.gov/myncbi/alexej.abyzov.1/bibliography/public/")
 
     def set_members(self, fname):
         if fname is not None:
@@ -124,7 +125,7 @@ def main():
         description='html builder for a publication list')
 
     parser.add_argument('-m', '--members', metavar='lab_member_list.txt', help='Lab member list to highlight in authors')
-    parser.add_argument('-c', '--cid', metavar='12345', required=True, help='My NCBI collection number')
+    parser.add_argument('-c', '--cid', metavar='40799671', required=True, help='My NCBI collection number')
 
     args = parser.parse_args()
     
