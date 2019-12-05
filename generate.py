@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from __future__ import print_function
 import csv
 
 temp=open("template.html").read()
@@ -11,7 +12,7 @@ temp_research=open("research.html").read()
 
 authors={}
 
-s="";
+s="      <div class='w3-row'>";
 ix=0;
 for i in csv.reader(open("people.csv"),delimiter=";"):
   authors[i[6]]=i
@@ -24,6 +25,7 @@ for i in csv.reader(open("people.csv"),delimiter=";"):
     t=t.replace("{{email}}",i[5])
     s+=t
   ix+=1
+s+="</div>"
 temp=temp.replace("{{people}}",s)
 
 def makeup_author(s):
@@ -70,7 +72,7 @@ s+="      </table>"
 
 temp=temp.replace("{{papers}}",s)
 
-s="";
+s="      <div class='w3-row'>";
 pix=0;
 for i in csv.reader(open("research.csv"),delimiter=";"):
   t=temp_research.replace("{{title}}",i[0])
@@ -78,13 +80,13 @@ for i in csv.reader(open("research.csv"),delimiter=";"):
   t=t.replace("{{img}}","imgs/"+i[2])
   s+=t
   pix+=1
-  
+s+="      </div>"
 
 temp=temp.replace("{{research}}",s)
 
 temp=temp.replace("{{positions}}",temp_jobs)
 
-s="";
+s="      <div class='w3-row'>";
 pix=0;
 py=""
 for i in csv.reader(open("tools.csv"),delimiter=";"):
@@ -105,13 +107,13 @@ for i in csv.reader(open("tools.csv"),delimiter=";"):
   t=t.replace("{{description}}",i[2])
   s+=t
   pix+=1
-
+s+="</div>"
 s+='<script src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>\n'
 
 
 temp=temp.replace("{{tools}}",s)
 
-s="";
+s="      <div class='w3-row'>";
 pix=0;
 py=""
 for i in csv.reader(open("news.csv"),delimiter=";"):
@@ -131,7 +133,7 @@ for i in csv.reader(open("news.csv"),delimiter=";"):
     t=t.replace("{{description}}",i[5])
     s+=t
   pix+=1
-
+s+="</div>"
 temp=temp.replace("{{news}}",s)
 
-print temp
+print(temp)
