@@ -16,7 +16,13 @@ $ ./papers_csv.py -c 40799671 > papers.csv
 $ python generate.py > index.html
 ```
 
-(IV) Commit and push to github
+(IV) Test
+```
+$ python -m SimpleHTTPServer
+```
+Then open in broser [web page](localhost:8000)
+
+(V) Commit and push to github
 ```
 $ git add *csv *html
 $ git commit -m “Update”
