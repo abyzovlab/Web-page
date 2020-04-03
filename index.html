@@ -3,6 +3,7 @@
 <title>Abyzov Lab</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="imgs/favicon.ico" type="image/x-icon" />
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link href="https://fonts.googleapis.com/css?family=Cookie|Charm|Gentium+Basic|Gabriela|Kanit|Germania+One|Inconsolata|Raleway|Pacifico|Merriweather|Share+Tech+Mono" rel="stylesheet">
 
@@ -88,6 +89,30 @@ body, html {
   margin-left:5px;
 }
 
+.research-div {
+    -moz-column-count:2;
+    -moz-column-gap: 0%;
+    -webkit-column-count:2;
+    -webkit-column-gap: 0%;
+    column-count: 2;
+    column-gap: 0%;
+}
+
+@media only screen and (max-width: 800px) {
+.research-div {
+    -moz-column-count:1;
+    -moz-column-gap: 0%;
+    -webkit-column-count:1;
+    -webkit-column-gap: 0%;
+    column-count: 1;
+    column-gap: 0%;
+}
+}
+
+.research {
+   display: inline-block;
+}
+
 </style>
 <body>
 
@@ -143,67 +168,58 @@ body, html {
 <!-- News Section -->
 <div class="w3-container" style="padding:128px 16px" id="research">
   <h3 class="w3-center">RESEARCH</h3>
-        <div class='w3-row'><div class="w3-col l6 m6 w3-padding-16">
-<div class="w3-card-4 w3-margin">
+        <div class='research-div'>
+<div class="w3-card-4 w3-margin research">
 <header class="w3-container w3-light-grey">
   <h3>Analysis of mosaic variants and cell lineage reconstruction</h3>
 </header>
-<div class="w3-container">
+<div class="w3-container w3-justify">
   <img src='imgs/mosaic.png' class='w3-center' style='width:90%;' /> 
   <p><p>Mutations in DNA that accumulate during the lifespan of each individual result in mosaic bodies, in which each cell has unique variants in the genome. That phenomenon is called somatic mosaicism. Despite the prevalence of somatic mosaicism, studying it has been limited by the lack of means to detect such variants at the level of single cells. Recent advances in single-cell genomics, however, make such research possible. Our group develops computational methods for precisely detecting somatic mosaic variants by harnessing new experimental approaches, including clonal expansion and whole genome amplification. By applying those methods to human samples, we aim to answer questions about the origin, spread, and consequence of mosaic mutations, which involves determining mutation rates, differences in the number and pattern of mutations between tissues and ages, relevance of the mutation to diseases and aging. Additionally, we are developing scalable approaches for tracing cell lineages using mutations as lineage markers.</p></b><br>
 </div>
 </div>
-</div>
 
 
-<div class="w3-col l6 m6 w3-padding-16">
-<div class="w3-card-4 w3-margin">
+<div class="w3-card-4 w3-margin research">
 <header class="w3-container w3-light-grey">
   <h3>Single cell studies</h3>
 </header>
-<div class="w3-container">
+<div class="w3-container w3-justify">
   <img src='imgs/singlecell.jpg' class='w3-center' style='width:90%;' /> 
   <p><p>Single-cell sequencing is the ultimate way to study somatic mosaicism in healthy tissues and in cancer. However, due to the scarcity of DNA in a single cell, an amplification process is required. Such amplifications can be achieved via clonal expansion, in which a single cell is cultured to produce a colony, and via in vitro whole genome amplification (WGA), in which DNA is amplified by using polymerases. We are currently formulating strategies for the quality control of WGA and to distinguish signal from noise that may be introduced during cell culture or DNA amplification, as well as developing approaches to estimate the contributions of signal and noise when they cannot be distinguished unambiguously.</p></b><br>
 </div>
 </div>
-</div>
 
 
-<div class="w3-col l6 m6 w3-padding-16">
-<div class="w3-card-4 w3-margin">
+<div class="w3-card-4 w3-margin research">
 <header class="w3-container w3-light-grey">
   <h3>Cancer genomics</h3>
 </header>
-<div class="w3-container">
+<div class="w3-container w3-justify">
   <img src='imgs/polyp2.png' class='w3-center' style='width:90%;' /> 
   <p><p>During the past decade, high-throughput next-generation technologies coupled with computational algorithms have enabled us to better understand the biology of cancer as well as the molecular underpinnings of its development and progression. Numerous functionally significant point mutations as well as structural alterations have been identified in several types and subtypes of cancers that illustrate the diverse landscape of the cancer genome. In our laboratory, we focus on the discovery and analysis of somatic point mutations and structural alterations, including deletions, duplications, and copy number changes, in colon cancer and glioma. We are especially interested in understanding the relationship between patterns of genetic alterations and modes of evolution of cancer, as well as molecular differences between cancer-free and cancer-adjacent polyps.</p></b><br>
 </div>
 </div>
-</div>
 
 
-<div class="w3-col l6 m6 w3-padding-16">
-<div class="w3-card-4 w3-margin">
+<div class="w3-card-4 w3-margin research">
 <header class="w3-container w3-light-grey">
   <h3>CNV and CNA analysis</h3>
 </header>
-<div class="w3-container">
+<div class="w3-container w3-justify">
   <img src='imgs/cnvnator.png' class='w3-center' style='width:90%;' /> 
   <p><p>Copy number variation (CNV) in the genome is a complex phenomenon that remains incompletely understood. Frequent in cancers, somatic copy number alterations (CNA) have been related to cancer susceptibility, cancer progression and invasiveness, individual response to the treatment, and patients’ quality of life after treatment. The detection of CNVs and CNAs is important to address a wide spectrum of clinical and scientific questions. Research in our laboratory is focused on the discovery and analysis of CNVs and CNAs along with their relevance to diseases. We have developed and continually improved a method, CNVnator/CNVpytor, for CNV discovery and genotyping from a read-depth analysis of personal genome or cancer sequencing that currently ranks among the best, most widely used methods for CNV analysis.</p></b><br>
 </div>
 </div>
-</div>
 
 
-<div class="w3-col l6 m6 w3-padding-16">
-<div class="w3-card-4 w3-margin">
+<div class="w3-card-4 w3-margin research">
 <header class="w3-container w3-light-grey">
   <h3>Variant function</h3>
 </header>
-<div class="w3-container">
+<div class="w3-container w3-justify">
   <img src='imgs/function.png' class='w3-center' style='width:90%;' /> 
   <p><p>Simultaneous advances in genomics (i.e., in variant discovery), epigenomics, and functional genomics (i.e., emergence of ChiP-seq, ATAC-seq, Hi-C, and RNA-seq techniques) provide opportunities to study both the origins and consequences of genomic variants. We are interested in understanding various epigenomic properties that predispose mutational processes generating single nucleotide variation (SNV) and structural variation (SV). Inversely, germline and somatic variants affect genome function. However, because many of those variants occur in non-coding regions of the genome, their effects remain poorly understood. In response, our laboratory is actively working to elucidate such effects with a particular focus on variants contributing to neuro-developmental disorders such as autism spectrum disorders and Tourette syndrome.</p></b><br>
-</div>
 </div>
 </div>
 
@@ -387,7 +403,7 @@ body, html {
     </div>
     <div class="w3-col l2 m4 w3-padding-16 w3-center">
       <div class="w3-card-4 w3-center">
-        <img src="imgs/he.jpg" alt="Chen" style="width:90%">
+        <img src="imgs/Chen.jpg" alt="Chen" style="width:90%">
         <div class="w3-container" style="height:200px">
           <b>Chen Wang, Ph.D.</b><br>
           <span class="w3-opacity">Affiliated member</span><br>
@@ -416,7 +432,7 @@ Le-Rademacher JG, Lopez CL, Kanwar R, Major-Elechi B, <span class='author' onmou
 <tr>
 <td width="40px">62.</td>
 <td><b><font color=blue>Combining copy number, methylation markers, and mutations as a panel for endometrial cancer detection via intravaginal tampon collection.</font></b><br>
-Sangtani A, <span class='author' onmouseover='author_image="imgs/he.jpg";'><b><u>Wang C</u></b></span>, Weaver A, Hoppman NL, Kerr SE, <span class='author' onmouseover='author_image="imgs/Alexej.jpg";'><b><u>Abyzov A</u></b></span>, Shridhar V, Staub J, Kocher JA, Voss JS, Podratz KC, Wentzensen N, Kisiel JB, Sherman ME, Bakkum-Gamez JN<br>
+Sangtani A, <span class='author' onmouseover='author_image="imgs/Chen.jpg";'><b><u>Wang C</u></b></span>, Weaver A, Hoppman NL, Kerr SE, <span class='author' onmouseover='author_image="imgs/Alexej.jpg";'><b><u>Abyzov A</u></b></span>, Shridhar V, Staub J, Kocher JA, Voss JS, Podratz KC, Wentzensen N, Kisiel JB, Sherman ME, Bakkum-Gamez JN<br>
 <b>Gynecol Oncol</b> 2020; 156(2):387-392<br>
 <a href='https://linkinghub.elsevier.com/retrieve/pii/S0090-8258(19)31679-8'><img class='paperimg' src='https://www.ncbi.nlm.nih.gov/corehtml/query/egifs/https:--linkinghub.elsevier.com-ihub-images-PubMedLink.gif'/></a><a href='https://ncbi.nlm.nih.gov/pubmed/31787246'><img class='paperimg' src='imgs/pubmed.png'/></a>
 </td>
@@ -956,10 +972,8 @@ Ilyin VA, <span class='author' onmouseover='author_image="imgs/Alexej.jpg";'><b>
   </div>
   <div class="github-card" data-github="abyzovlab/CNVnator" data-width="100%" data-height="153" data-theme="default"></div>
   <br>More: <a href='http://www.ncbi.nlm.nih.gov/pubmed/21293372'>ref</a>
+  <br><br>
 </div>
-<footer class="w3-container w3-light-grey">
-  <h5>CNVnator</h5>
-</footer>
 </div>
 </div>
 
@@ -976,10 +990,8 @@ Ilyin VA, <span class='author' onmouseover='author_image="imgs/Alexej.jpg";'><b>
   </div>
   <div class="github-card" data-github="abyzovlab/CNVpytor" data-width="100%" data-height="153" data-theme="default"></div>
   <br>More: <a href='https://github.com/abyzovlab/CNVpytor'>ref</a>
+  <br><br>
 </div>
-<footer class="w3-container w3-light-grey">
-  <h5>CNVpytor</h5>
-</footer>
 </div>
 </div>
 
@@ -996,10 +1008,8 @@ Ilyin VA, <span class='author' onmouseover='author_image="imgs/Alexej.jpg";'><b>
   </div>
   <div class="github-card" data-github="abyzovlab/AGE" data-width="100%" data-height="153" data-theme="default"></div>
   <br>More: <a href='http://www.ncbi.nlm.nih.gov/pubmed/21233167''>ref</a>
+  <br><br>
 </div>
-<footer class="w3-container w3-light-grey">
-  <h5>AGE</h5>
-</footer>
 </div>
 </div>
 
@@ -1016,10 +1026,8 @@ Ilyin VA, <span class='author' onmouseover='author_image="imgs/Alexej.jpg";'><b>
   </div>
   <div class="github-card" data-github="abyzovlab/Leucippus" data-width="100%" data-height="153" data-theme="default"></div>
   <br>More: <a href='https://www.ncbi.nlm.nih.gov/pubmed/28235832'>ref</a>
+  <br><br>
 </div>
-<footer class="w3-container w3-light-grey">
-  <h5>Leucippus</h5>
-</footer>
 </div>
 </div>
 
@@ -1036,10 +1044,8 @@ Ilyin VA, <span class='author' onmouseover='author_image="imgs/Alexej.jpg";'><b>
   </div>
   <div class="github-card" data-github="abyzovlab/vcf2diploid" data-width="100%" data-height="153" data-theme="default"></div>
   <br>More: <a href='http://www.ncbi.nlm.nih.gov/pubmed/21811232'>ref</a>
+  <br><br>
 </div>
-<footer class="w3-container w3-light-grey">
-  <h5>vcf2diploid</h5>
-</footer>
 </div>
 </div>
 
@@ -1056,10 +1062,8 @@ Ilyin VA, <span class='author' onmouseover='author_image="imgs/Alexej.jpg";'><b>
   </div>
   
   <br>More: <a href='http://www.ncbi.nlm.nih.gov/pubmed/19705487'>ref</a>
+  <br><br>
 </div>
-<footer class="w3-container w3-light-grey">
-  <h5>Belka</h5>
-</footer>
 </div>
 </div>
 

@@ -72,7 +72,7 @@ s+="      </table>"
 
 temp=temp.replace("{{papers}}",s)
 
-s="      <div class='w3-row'>";
+s="      <div class='research-div'>\n";
 pix=0;
 for i in csv.reader(open("research.csv"),delimiter=";"):
   t=temp_research.replace("{{title}}",i[0])
