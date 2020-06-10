@@ -1,8 +1,8 @@
-CNVnator;abyzovlab/CNVnator;A tool for CNV discovery and genotyping from depth of read mapping.;http://www.ncbi.nlm.nih.gov/pubmed/21293372;
 CNVpytor;abyzovlab/CNVpytor;CNVpytor is a Python extension of CNVnator: package and command line tool for CNV analysis.;https://github.com/abyzovlab/CNVpytor;
+CNVnator;abyzovlab/CNVnator;A tool for CNV discovery and genotyping from depth of read mapping.;http://www.ncbi.nlm.nih.gov/pubmed/21293372;
+All2;abyzovlab/All2;A tool for filtering variants from all2all comparison of multiple clones or single cells;;;
+SCellector;abyzovlab/SCellector;Tool to conduct QC of single cell amplification;;;
 AGE;abyzovlab/AGE;A tool that implements an algorithm for optimal alignment of sequences with SVs.;http://www.ncbi.nlm.nih.gov/pubmed/21233167';
 Leucippus;abyzovlab/Leucippus;A tool for confirmation of mosaic variants from targeted sequencing.;https://www.ncbi.nlm.nih.gov/pubmed/28235832;
 vcf2diploid;abyzovlab/vcf2diploid;Personal genome constructor, it can be used to construct a personal diploid genome sequence by including personal variants into reference genome.;http://www.ncbi.nlm.nih.gov/pubmed/21811232;
 Belka;abyzovlab/Belka;A software that implements RigidFinder, a method to detect protein rigid blocks from two different conformations.<br><br>Download <a href="http://belka.molmovdb.org/Belka_v0.1.zip"><b><u>Belka v0.1</u></b></a>;http://www.ncbi.nlm.nih.gov/pubmed/19705487;
-All2;abyzovlab/All2;A tool for filtering variants from all2all comparison of multiple clones or single cells;;;
-SCellector;abyzovlab/SCellector;Tool to conduct QC of single cell amplification;;;
