@@ -13,6 +13,7 @@
 <style>
 body {font-family: "Merriweather", sans-serif}
 h1,h2,h3,h4,h5,h6 {font-family: "Gentium Basic", sans-serif}
+
 .w3-top {font-family: "Merriweather", sans-serif;
   font-size:14px;
 }
@@ -60,6 +61,24 @@ body, html {
   padding: 0px 16px;
 }
 .mySlides {display:none;}
+
+#news-panel {
+      width:75%;
+      max-height: 60%;
+      position: fixed;
+      overflow-y:auto;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      background-color: rgba(255,255,255,0.8);
+      padding: 5px;
+      border: 1px solid #999;
+      text-align: left;
+      padding-left: 10px;
+}
+
+.hidden { display: none !important; }
 
 .papertable {
   border-collapse: collapse;
@@ -114,8 +133,8 @@ body, html {
 }
 
 </style>
-<body>
 
+<body>
 <!-- Navbar (sit on top) -->
 <div class="w3-top">
   <div class="w3-bar w3-white w3-card" id="topbar">
@@ -156,6 +175,14 @@ body, html {
   </div> 
 </header>
 
+<!-- News archive -->
+<div id="news-panel" class="hidden" onclick="news_archive()">
+    <button style="float:right">X</button>
+      <h2>News archive</h2>
+      {{news_archive}}
+</div>
+
+
 <!-- Research Section -->
 <!-- News Section -->
 <div class="w3-container" style="padding:128px 16px" id="research">
@@ -167,21 +194,21 @@ body, html {
 <div class="w3-container" style="padding:128px 16px" id="news">
   <h3 class="w3-center">NEWS</h3>
   {{news}}
-  <center><b><u>GO TO NEWS ARCHIVE</u><b></center>
+  <center><b><u><span onclick="news_archive()">GO TO NEWS ARCHIVE</span></u><b></center>
 </div>
 
 <!-- Team Section -->
 <div class="w3-container" style="padding:128px 16px" id="team">
   <h3 class="w3-center">THE TEAM</h3>
-  <div class="w3-row-padding w3" style="margin-top:64px">
+  <div class="w3-row-padding w3" style="margin-top:64px"><div class='w3-row'>
   {{people}}
-  </div>
+  </div></div>
 </div>
 
 
 <div class="w3-container" style="padding:128px 16px" id="papers">
   <h3 class="w3-center">PAPERS</h3>
-      {{papers}}
+  {{papers}}
 </div>
 
 <div class="w3-container" style="padding:128px 16px" id="tools">
@@ -234,6 +261,11 @@ body, html {
 <img id="image" width=150 src="imgs/he.jpg"></img> 
 
 <script>
+
+function news_archive() {
+  document.getElementById('news-panel').classList.toggle('hidden');
+}
+
 // Modal Image Gallery
 function onClick(element) {
   document.getElementById("img01").src = element.src;

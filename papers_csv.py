@@ -43,13 +43,14 @@ class MyNCBI:
                 
                 sys.stderr.write("Scraping {index}. {title}...\n".format(index=index, title=title[:40]))
                 
+                author = docsum.find_element_by_xpath('./span[@class="authors"]').text.rstrip(".")
+                author = self.highlight_members(author)
+                
                 try:
                     pmid = docsum.find_element_by_xpath('./span[@class="pmid"]').text.split()[-1]
                     year, paper = self.paper_from_pmid(pmid)
-                    paper = paper.format(index=index, title=title)
+                    paper = paper.format(index=index, title=title, author=author)
                 except NoSuchElementException:
-                    author = docsum.find_element_by_xpath('./span[@class="authors"]').text.rstrip(".")
-                    author = self.highlight_members(author)
                     year = docsum.find_element_by_xpath('./span[@class="displaydate"]').text[:4]
                     page = docsum.find_element_by_xpath('./span[@class="page"]').text.rstrip(".")
                     try:
@@ -67,7 +68,7 @@ class MyNCBI:
                         ch_title = docsum.find_element_by_xpath('./span[@class="chaptertitle"]').text
                         publisher = docsum.find_element_by_xpath('./span[@class="book-publisher"]').text
                         
-                        paper = '''{title}|{author}|{chapter}|{year}|{issue}; {page}||||\n'''.format(index=index, chapter=ch_title+", "+publisher, title=title, 
+                        paper = '''{title}|{author}|{chapter}|{year}|{issue}; {page}||||\n'''.format(index=index, chapter=ch_title+", "+publisher, title=title,
                                           author=author, issue=ch_num, year=year, page=page) 
                         
                 self.papers[year].append(paper)
@@ -91,27 +92,24 @@ class MyNCBI:
         return author
 
     def paper_from_pmid(self, pmid):
-        self.pubmed.get("https://ncbi.nlm.nih.gov/pubmed/{pmid}".format(pmid=pmid))
+        self.pubmed.get("https://pubmed.ncbi.nlm.nih.gov/{pmid}".format(pmid=pmid))
 
-        author_tags = self.pubmed.find_elements_by_xpath('//div[@class="auths"]/a')
-        author = self.highlight_members(', '.join([tag.text for tag in author_tags]))
- 
-        cite_tag = self.pubmed.find_element_by_xpath('//div[@class="cit"]')
-        journal, info = cite_tag.text.split(sep='. ')[:2]
-        year = info.strip()[:4]
+        journal = self.pubmed.find_element_by_xpath('//button[@id="full-view-journal-trigger"]').text
+        cite_info = self.pubmed.find_element_by_xpath('//span[@class="cit"]').text
+        year = re.search(r"[12]\d\d\d", cite_info.split(sep=';')[0])[0] 
         try:
-            issue = info.split(sep=';')[1].strip().rstrip(".")
+            issue = cite_info.split(sep=';')[1].strip().rstrip(".")
         except IndexError:
             issue = "[Epub ahead of print]"
-        paper = '{{title}}|{author}|{journal}|{year}|{issue}|'.format(author=author, journal=journal, year=year, issue=issue)
+        paper = '{{title}}|{{author}}|{journal}|{year}|{issue}|'.format(journal=journal, year=year, issue=issue)
         
-        link_tag = self.pubmed.find_elements_by_xpath('//div[@class="icons portlet"]/a')
+        link_tag = self.pubmed.find_elements_by_xpath('//a[contains(@class,"link-item") and contains(@class,"dialog-focus")]')
         if link_tag:
             paper += '{href}|{src}|'.format(href=link_tag[0].get_attribute('href'),
               src=link_tag[0].find_element_by_tag_name('img').get_attribute('src'))
         else:
             paper += '||'
-        paper += 'https://ncbi.nlm.nih.gov/pubmed/{pmid}|imgs/pubmed.png\n'.format(pmid=pmid)
+        paper += 'https://pubmed.ncbi.nlm.nih.gov/{pmid}|imgs/pubmed.png\n'.format(pmid=pmid)
 
         return (year, paper)
 
