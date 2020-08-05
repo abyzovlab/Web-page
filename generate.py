@@ -70,7 +70,7 @@ research += "      </div>"
 tools = "      <div class='w3-row'>";
 for i in csv.reader(open("tools.csv"), delimiter=";"):
     tools += temp_tools.format(card='<div class="github-card" data-github="' + i[
-        1] + '" data-width="100%" data-height="153" data-theme="default"></div>')
+        1] + '" data-width="100%" data-height="200" data-theme="default"></div>')
 tools += "</div>"
 tools += '<script src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>\n'
 
