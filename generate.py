@@ -102,5 +102,10 @@ for i in csv.reader(open("news.csv"), delimiter=";"):
     pix += 1
 news += "</div>"
 
+import functools
+gp = next(csv.reader(open("group_photos.csv"), delimiter="|"))
+gpa = "["+functools.reduce(str.__add__,map(lambda s:"'"+s+"', ",gp),"")[:-2]+"]"
+
 print(temp.replace("{{people}}", people).replace("{{papers}}", papers).replace("{{positions}}", temp_jobs).replace(
-    "{{research}}", research).replace("{{news}}", news).replace("{{tools}}", tools).replace("{{news_archive}}",news_archive))
+    "{{research}}", research).replace("{{news}}", news).replace("{{tools}}", tools).replace("{{news_archive}}",news_archive)
+    .replace("{{group_photos_array}}",gpa))
