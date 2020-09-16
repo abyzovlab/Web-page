@@ -9,7 +9,7 @@ Abyzov lab [web page](https://abyzovlab.github.io/Web-page/)
 $ ./papers_csv.py -a alexej.abyzov > papers.csv
 ```
 
-(II) Manually update: news.csv people.csv research.csv tools.csv
+(II) Manually update: news.csv people.csv research.csv tools.csv group_photos.csv paper_free_links.csv
 
 (III) Generate page
 ```
