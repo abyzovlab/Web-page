@@ -134,7 +134,7 @@ body, html {
 
 </style>
 
-<body>
+<body onload="init();">
 <!-- Navbar (sit on top) -->
 <div class="w3-top">
   <div class="w3-bar w3-white w3-card" id="topbar">
@@ -466,7 +466,7 @@ Jourdon A, Fasching L, Scuderi S, <span class='author' onmouseover='author_image
 <td><b><font color=blue>Cell Lineage Tracing and Cellular Diversity in Humans.</font></b><br>
 <span class='author' onmouseover='author_image="imgs/Alexej.jpg";'><b><u>Abyzov A</u></b></span>, Vaccarino FM<br>
 <b>Annu Rev Genomics Hum Genet</b> 2020; 21:101-116<br>
-<a href='https://arjournals.annualreviews.org/doi/10.1146/annurev-genom-083118-015241?url_ver=Z39.88-2003&rfr_id=ori:rid:crossref.org&rfr_dat=cr_pub%20%200pubmed'><img class='paperimg' src='https://cdn.ncbi.nlm.nih.gov/corehtml/query/egifs/https:--arjournals.annualreviews.org-images-AnnualReviews100x25.gif'/></a><a href='https://pubmed.ncbi.nlm.nih.gov/32413272'><img class='paperimg' src='imgs/pubmed.png'/></a>
+<a href='https://arjournals.annualreviews.org/doi/10.1146/annurev-genom-083118-015241?url_ver=Z39.88-2003&rfr_id=ori:rid:crossref.org&rfr_dat=cr_pub%20%200pubmed'><img class='paperimg' src='https://cdn.ncbi.nlm.nih.gov/corehtml/query/egifs/https:--arjournals.annualreviews.org-images-AnnualReviews100x25.gif'/></a><a href='https://pubmed.ncbi.nlm.nih.gov/32413272'><img class='paperimg' src='imgs/pubmed.png'/></a><a href='http://www.annualreviews.org/eprint/CFKKEFS5PTNNW4XGQXKC/full/10.1146/annurev-genom-083118-015241'><img class='paperimg' src='imgs/link.png'/></a>
 </td>
 </tr>
 <tr>
@@ -1246,6 +1246,25 @@ function showDivs(n) {
   }
   x[slideIndex-1].style.display = "block";  
 }
+
+
+var imageIx
+var images
+
+function init() {
+  imageIx = 0
+  images = ["imgs/group.2019.jpg", "imgs/group.2018.jpg"]
+  setInterval(changeImage,5000)
+}
+
+function changeImage() {
+  console.log(images)
+  var x = document.getElementsByClassName("bgimg-1")[0];
+  imageIx += 1
+  imageIx %= images.length  
+  x.style.backgroundImage = "url('"+images[imageIx]+"')";
+}
+
 </script>
 
 </body>

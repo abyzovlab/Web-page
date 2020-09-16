@@ -134,7 +134,7 @@ body, html {
 
 </style>
 
-<body>
+<body onload="init();">
 <!-- Navbar (sit on top) -->
 <div class="w3-top">
   <div class="w3-bar w3-white w3-card" id="topbar">
@@ -348,6 +348,25 @@ function showDivs(n) {
   }
   x[slideIndex-1].style.display = "block";  
 }
+
+
+var imageIx
+var images
+
+function init() {
+  imageIx = 0
+  images = ["imgs/group.2019.jpg", "imgs/group.2018.jpg"]
+  setInterval(changeImage,5000)
+}
+
+function changeImage() {
+  console.log(images)
+  var x = document.getElementsByClassName("bgimg-1")[0];
+  imageIx += 1
+  imageIx %= images.length  
+  x.style.backgroundImage = "url('"+images[imageIx]+"')";
+}
+
 </script>
 
 </body>

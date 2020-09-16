@@ -39,6 +39,16 @@ def makeup_author(s):
     return ", ".join(nl)
 
 
+
+paper_free_links_title = {}
+paper_free_links_id = {}
+for i in csv.reader(open("paper_free_links.csv"), delimiter="|"):
+    if len(i)>2:
+      if i[0]!="":
+        paper_free_links_title[i[0]]=i[2]
+      if i[1]!="":
+        paper_free_links_id[i[1]]=i[2]
+        
 papers = "";
 pix = 0;
 py = ""
@@ -50,13 +60,15 @@ for i in csv.reader(open("papers.csv"), delimiter="|"):
         if py != "":
             papers += "      </table><br>"
         papers += "      <b>" + i[3] + "</b><br>\n      <table class='papertable'>\n"
-    img1, img2 = "", ""
+    img1, img2, img3 = "", "", ""
     if i[5] != "":
         img1 = "<a href='" + i[5] + "'><img class='paperimg' src='" + i[6] + "'/></a>"
     if i[7] != "":
         img2 = "<a href='" + i[7] + "'><img class='paperimg' src='" + i[8] + "'/></a>"
+    if i[0] in paper_free_links_title:
+        img3 = "<a href='" + paper_free_links_title[i[0]] + "'><img class='paperimg' src='imgs/link.png'/></a>"
     papers += temp_papers.format(title=i[0], authors=makeup_author(i[1]), journal=i[2], year=i[3], ref=i[4], img1=img1,
-                                 img2=img2, index=str(papercount))
+                                 img2=img2, img3=img3, index=str(papercount))
     papercount -= 1
     pix += 1
     py = i[3]
