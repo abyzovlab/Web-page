@@ -97,7 +97,7 @@ for i in csv.reader(open("news.csv"), delimiter=";"):
         img = "<img src='" + i[2] + "' class='w3-center' style='width:90%;'>"
     if pix < 4:
         news += temp_news.format(title=i[0], link=link, img=img, subtitle=i[3], footer=i[4], description=i[5])
-    news_archive += "<li><b>{title}</b> {subtitle} <br> {description}<br>{img} {link}<br> {footer} <br><br>".format(
+    news_archive += "<li><b>{title}</b><br><i>{subtitle}</i><br> {description}<br>{img} {link}<br> {footer} <br><br>".format(
       title=i[0], link=link, img=img, subtitle=i[3], footer=i[4], description=i[5])
     pix += 1
 news += "</div>"
