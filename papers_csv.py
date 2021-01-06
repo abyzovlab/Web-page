@@ -103,11 +103,11 @@ class MyNCBI:
             issue = "[Epub ahead of print]"
         paper = '{{title}}|{{author}}|{journal}|{year}|{issue}|'.format(journal=journal, year=year, issue=issue)
         
-        link_tag = self.pubmed.find_elements_by_xpath('//a[contains(@class,"link-item") and contains(@class,"dialog-focus")]')
-        if link_tag:
+        try:
+            link_tag = self.pubmed.find_elements_by_xpath('//a[contains(@class,"link-item") and contains(@class,"dialog-focus")]')
             paper += '{href}|{src}|'.format(href=link_tag[0].get_attribute('href'),
               src=link_tag[0].find_element_by_tag_name('img').get_attribute('src'))
-        else:
+        except NoSuchElementException:
             paper += '||'
         paper += 'https://pubmed.ncbi.nlm.nih.gov/{pmid}|imgs/pubmed.png\n'.format(pmid=pmid)
 
