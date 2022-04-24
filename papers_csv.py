@@ -108,7 +108,7 @@ class MyNCBI:
         try:
             link_tag = self.pubmed.find_elements(By.XPATH, '//a[contains(@class,"link-item") and contains(@class,"dialog-focus")]')
             paper += '{href}|{src}|'.format(href=link_tag[0].get_attribute('href'),
-              src=link_tag[0].find_element_by_tag_name('img').get_attribute('src'))
+              src=link_tag[0].find_element(By.TAG_NAME, 'img').get_attribute('src'))
         except NoSuchElementException:
             paper += '||'
         paper += 'https://pubmed.ncbi.nlm.nih.gov/{pmid}|imgs/pubmed.png\n'.format(pmid=pmid)
