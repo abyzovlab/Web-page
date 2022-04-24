@@ -5,6 +5,7 @@ import os
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.common.by import By
 from time import sleep, localtime, strftime
 import re
 import sys
@@ -33,40 +34,41 @@ class MyNCBI:
         self.myncbi.get("https://www.ncbi.nlm.nih.gov/myncbi/{authid}.1/bibliography/public/?sortby=pubDate&sdirection=ascending".format(authid=authid))
         index = 0
         while True:
-            for docsum in self.myncbi.find_elements_by_xpath('//div[@class="ncbi-docsum"]'):
+#            for docsum in self.myncbi.find_elements_by_xpath('//div[@class="ncbi-docsum"]'):
+            for docsum in self.myncbi.find_elements(By.XPATH, '//div[@class="ncbi-docsum"]'):
                 index += 1
 
                 try:
-                    title = docsum.find_element_by_xpath('./span[@class="title"]').text
+                    title = docsum.find_element(By.XPATH, './span[@class="title"]').text
                 except NoSuchElementException:
-                    title = docsum.find_element_by_xpath('./a').text
+                    title = docsum.find_element(By.XPATH, './a').text
                 
                 sys.stderr.write("Scraping {index}. {title}...\n".format(index=index, title=title[:40]))
                 
-                author = docsum.find_element_by_xpath('./span[@class="authors"]').text.rstrip(".")
+                author = docsum.find_element(By.XPATH, './span[@class="authors"]').text.rstrip(".")
                 author = self.highlight_members(author)
                 
                 try:
-                    pmid = docsum.find_element_by_xpath('./span[@class="pmid"]').text.split()[-1]
+                    pmid = docsum.find_element(By.XPATH, './span[@class="pmid"]').text.split()[-1]
                     year, paper = self.paper_from_pmid(pmid)
                     paper = paper.format(index=index, title=title, author=author)
                 except NoSuchElementException:
-                    year = docsum.find_element_by_xpath('./span[@class="displaydate"]').text[:4]
-                    page = docsum.find_element_by_xpath('./span[@class="page"]').text.rstrip(".")
+                    year = docsum.find_element(By.XPATH, './span[@class="displaydate"]').text[:4]
+                    page = docsum.find_element(By.XPATH, './span[@class="page"]').text.rstrip(".")
                     try:
-                        journal = docsum.find_element_by_xpath('./span[@class="journalname"]').text.rstrip(".")
-                        volume = docsum.find_element_by_xpath('./span[@class="volume"]').text
-                        issue = docsum.find_element_by_xpath('./span[@class="issue"]').text
+                        journal = docsum.find_element(By.XPATH, './span[@class="journalname"]').text.rstrip(".")
+                        volume = docsum.find_element(By.XPATH, './span[@class="volume"]').text
+                        issue = docsum.find_element(By.XPATH, './span[@class="issue"]').text
                         
                         paper = '''{title}|{author}|{journal}|{year}|{volume} {issue}; {page}||||\n'''.format(index=index, title=title, 
                                         author=author, year=year, journal=journal, issue=issue, volume=volume, page=page)
 
                         
                     except NoSuchElementException:    
-                        editor = docsum.find_element_by_xpath('./span[@class="editors"]').text    
-                        ch_num = docsum.find_element_by_xpath('./span[@class="chapter-details"]').text
-                        ch_title = docsum.find_element_by_xpath('./span[@class="chaptertitle"]').text
-                        publisher = docsum.find_element_by_xpath('./span[@class="book-publisher"]').text
+                        editor = docsum.find_element(By.XPATH, './span[@class="editors"]').text    
+                        ch_num = docsum.find_element(By.XPATH, './span[@class="chapter-details"]').text
+                        ch_title = docsum.find_element(By.XPATH, './span[@class="chaptertitle"]').text
+                        publisher = docsum.find_element(By.XPATH, './span[@class="book-publisher"]').text
                         
                         paper = '''{title}|{author}|{chapter}|{year}|{issue}; {page}||||\n'''.format(index=index, chapter=ch_title+", "+publisher, title=title,
                                           author=author, issue=ch_num, year=year, page=page) 
@@ -74,7 +76,7 @@ class MyNCBI:
                 self.papers[year].append(paper)
 
             try:
-                self.myncbi.find_element_by_xpath('//a[@class="nextPage enabled"]').click()
+                self.myncbi.find_element(By.XPATH, '//a[@class="nextPage enabled"]').click()
             except NoSuchElementException:
                 break
 
@@ -94,8 +96,8 @@ class MyNCBI:
     def paper_from_pmid(self, pmid):
         self.pubmed.get("https://pubmed.ncbi.nlm.nih.gov/{pmid}".format(pmid=pmid))
 
-        journal = self.pubmed.find_element_by_xpath('//button[@id="full-view-journal-trigger"]').text
-        cite_info = self.pubmed.find_element_by_xpath('//span[@class="cit"]').text
+        journal = self.pubmed.find_element(By.XPATH, '//button[@id="full-view-journal-trigger"]').text
+        cite_info = self.pubmed.find_element(By.XPATH, '//span[@class="cit"]').text
         year = re.search(r"[12]\d\d\d", cite_info.split(sep=';')[0])[0] 
         try:
             issue = cite_info.split(sep=';')[1].strip().rstrip(".")
@@ -104,7 +106,7 @@ class MyNCBI:
         paper = '{{title}}|{{author}}|{journal}|{year}|{issue}|'.format(journal=journal, year=year, issue=issue)
         
         try:
-            link_tag = self.pubmed.find_elements_by_xpath('//a[contains(@class,"link-item") and contains(@class,"dialog-focus")]')
+            link_tag = self.pubmed.find_elements(By.XPATH, '//a[contains(@class,"link-item") and contains(@class,"dialog-focus")]')
             paper += '{href}|{src}|'.format(href=link_tag[0].get_attribute('href'),
               src=link_tag[0].find_element_by_tag_name('img').get_attribute('src'))
         except NoSuchElementException:
