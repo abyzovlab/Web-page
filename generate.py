@@ -19,8 +19,15 @@ ix = 0;
 for i in csv.reader(open("people.csv"), delimiter=";"):
     authors[i[6]] = i
     if i[1] != "Alumni":
+        nln=""
+        nn=i[7].strip()
+        if nn!="" and nn!="\n":
+            print("!!!"+nn+"!!!")
+            nln="("+i[7]+")<br>"
+        else:
+            nln="<br>"
         people += temp_people.format(name=i[0], title=i[1], description=i[2], imgsrc="imgs/" + i[3], imgalt=i[4],
-                                     email=i[5])
+                                     email=i[5], native_language_name=nln)
         ix += 1
     else:
         lalumni += "<li>" + i[0]
