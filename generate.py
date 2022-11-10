@@ -22,7 +22,6 @@ for i in csv.reader(open("people.csv"), delimiter=";"):
         nln=""
         nn=i[7].strip()
         if nn!="" and nn!="\n":
-            print("!!!"+nn+"!!!")
             nln="("+i[7]+")<br>"
         else:
             nln="<br>"
