@@ -53,25 +53,30 @@ class MyNCBI:
                     year, paper = self.paper_from_pmid(pmid)
                     paper = paper.format(index=index, title=title, author=author)
                 except NoSuchElementException:
-                    year = docsum.find_element(By.XPATH, './span[@class="displaydate"]').text[:4]
-                    page = docsum.find_element(By.XPATH, './span[@class="page"]').text.rstrip(".")
                     try:
-                        journal = docsum.find_element(By.XPATH, './span[@class="journalname"]').text.rstrip(".")
-                        volume = docsum.find_element(By.XPATH, './span[@class="volume"]').text
-                        issue = docsum.find_element(By.XPATH, './span[@class="issue"]').text
+                        year = docsum.find_element(By.XPATH, './span[@class="displaydate"]').text[:4]
+                        page = docsum.find_element(By.XPATH, './span[@class="page"]').text.rstrip(".")
+                        try:
+                            journal = docsum.find_element(By.XPATH, './span[@class="journalname"]').text.rstrip(".")
+                            volume = docsum.find_element(By.XPATH, './span[@class="volume"]').text
+                            issue = docsum.find_element(By.XPATH, './span[@class="issue"]').text
                         
-                        paper = '''{title}|{author}|{journal}|{year}|{volume} {issue}; {page}||||\n'''.format(index=index, title=title, 
-                                        author=author, year=year, journal=journal, issue=issue, volume=volume, page=page)
-
+                            paper = '''{title}|{author}|{journal}|{year}|{volume} {issue}; {page}||||\n'''.format(index=index, title=title, 
+                                        author=author, year=year, journal=journal, issue=issue, volume=volume, page=page)  
+                        except NoSuchElementException:    
+                            editor = docsum.find_element(By.XPATH, './span[@class="editors"]').text    
+                            ch_num = docsum.find_element(By.XPATH, './span[@class="chapter-details"]').text
+                            ch_title = docsum.find_element(By.XPATH, './span[@class="chaptertitle"]').text
+                            publisher = docsum.find_element(By.XPATH, './span[@class="book-publisher"]').text
                         
-                    except NoSuchElementException:    
-                        editor = docsum.find_element(By.XPATH, './span[@class="editors"]').text    
-                        ch_num = docsum.find_element(By.XPATH, './span[@class="chapter-details"]').text
-                        ch_title = docsum.find_element(By.XPATH, './span[@class="chaptertitle"]').text
-                        publisher = docsum.find_element(By.XPATH, './span[@class="book-publisher"]').text
-                        
-                        paper = '''{title}|{author}|{chapter}|{year}|{issue}; {page}||||\n'''.format(index=index, chapter=ch_title+", "+publisher, title=title,
+                            paper = '''{title}|{author}|{chapter}|{year}|{issue}; {page}||||\n'''.format(index=index, chapter=ch_title+", "+publisher, title=title,
                                           author=author, issue=ch_num, year=year, page=page) 
+                    except NoSuchElementException:
+                        tmp = docsum.find_element(By.XPATH,'./span[@class="confloc"]').text
+                        publisher  = tmp.split("; ")[1]
+                        year = tmp.split("; c")[-1].rstrip(". ")
+                        paper = '''{title}|{author}|{publisher}|{year}|||||\n'''.format(index=index, publisher=publisher, title=title,
+                                          author=author, year=year)
                         
                 self.papers[year].append(paper)
 
