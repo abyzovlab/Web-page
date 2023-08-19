@@ -6,6 +6,7 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
 from time import sleep, localtime, strftime
 import re
 import sys
@@ -22,9 +23,13 @@ class MyNCBI:
         self.papers = defaultdict(list)
         self.set_members(members_fname)
 
-        self.myncbi = webdriver.Chrome(executable_path=self.path, options=self.options)
+#        self.myncbi = webdriver.Chrome(executable_path=self.path, options=self.options)sele
+        service = Service(executable_path='./chromedriver')
+        self.myncbi = webdriver.Chrome(service=service, options=self.options)
+
         self.myncbi.implicitly_wait(5)
-        self.pubmed = webdriver.Chrome(executable_path=self.path, options=self.options)
+#        self.pubmed = webdriver.Chrome(executable_path=self.path, options=self.options)
+        self.pubmed = webdriver.Chrome(service=service, options=self.options)
         self.pubmed.implicitly_wait(5)
 
         self.scrap_myncbi(authid)
