@@ -13,12 +13,12 @@ $ ./papers_csv.py -a alexej.abyzov > papers.csv
 
 (III) Generate page
 ```
-$ python generate.py > index.html
+$ python3 generate.py > index.html
 ```
 
 (IV) Test
 ```
-$ python -m SimpleHTTPServer
+$ python3 -m SimpleHTTPServer
 ```
 Then open in broser [web page](localhost:8000)
 
