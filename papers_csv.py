@@ -23,12 +23,10 @@ class MyNCBI:
         self.papers = defaultdict(list)
         self.set_members(members_fname)
 
-#        self.myncbi = webdriver.Chrome(executable_path=self.path, options=self.options)sele
         service = Service(executable_path='./chromedriver')
         self.myncbi = webdriver.Chrome(service=service, options=self.options)
 
         self.myncbi.implicitly_wait(5)
-#        self.pubmed = webdriver.Chrome(executable_path=self.path, options=self.options)
         self.pubmed = webdriver.Chrome(service=service, options=self.options)
         self.pubmed.implicitly_wait(5)
 
@@ -41,7 +39,6 @@ class MyNCBI:
         self.myncbi.get("https://www.ncbi.nlm.nih.gov/myncbi/{authid}.1/bibliography/public/?sortby=pubDate&sdirection=ascending".format(authid=authid))
         index = 0
         while True:
-#            for docsum in self.myncbi.find_elements_by_xpath('//div[@class="ncbi-docsum"]'):
             for docsum in self.myncbi.find_elements(By.XPATH, '//div[@class="ncbi-docsum"]'):
                 index += 1
 
@@ -72,12 +69,15 @@ class MyNCBI:
                                         author=author, year=year, journal=journal, issue=issue, volume=volume, page=page)  
                         except NoSuchElementException:    
                             editor = docsum.find_element(By.XPATH, './span[@class="editors"]').text    
-                            ch_num = docsum.find_element(By.XPATH, './span[@class="chapter-details"]').text
-                            ch_title = docsum.find_element(By.XPATH, './span[@class="chaptertitle"]').text
                             publisher = docsum.find_element(By.XPATH, './span[@class="book-publisher"]').text
-                        
-                            paper = '''{title}|{author}|{chapter}|{year}|{issue}; {page}||||\n'''.format(index=index, chapter=ch_title+", "+publisher, title=title,
+                            try:
+                                ch_title = docsum.find_element_by_xpath('./span[@class="chaptertitle"]').text
+                                ch_num = docsum.find_element_by_xpath('./span[@class="chapter-details"]').text
+                                paper = '''{title}|{author}|{chapter}|{year}|{issue}; {page}||||\n'''.format(index=index, chapter=ch_title+", "+publisher, title=title,
                                           author=author, issue=ch_num, year=year, page=page) 
+                            except NoSuchElementException:
+                                paper = '''{title}|{author}|{chapter}|{year}|{page}||||\n'''.format(index=index, chapter=publisher, title=title,
+                                          author=author, year=year, page=page)
                     except NoSuchElementException:
                         tmp = docsum.find_element(By.XPATH,'./span[@class="confloc"]').text
                         publisher  = tmp.split("; ")[1]
