@@ -71,8 +71,8 @@ class MyNCBI:
                             editor = docsum.find_element(By.XPATH, './span[@class="editors"]').text    
                             publisher = docsum.find_element(By.XPATH, './span[@class="book-publisher"]').text
                             try:
-                                ch_title = docsum.find_element_by_xpath('./span[@class="chaptertitle"]').text
-                                ch_num = docsum.find_element_by_xpath('./span[@class="chapter-details"]').text
+                                ch_title = docsum.find_element(By.XPATH,'./span[@class="chaptertitle"]').text
+                                ch_num = docsum.find_element(By.XPATH,'./span[@class="chapter-details"]').text
                                 paper = '''{title}|{author}|{chapter}|{year}|{issue}; {page}||||\n'''.format(index=index, chapter=ch_title+", "+publisher, title=title,
                                           author=author, issue=ch_num, year=year, page=page) 
                             except NoSuchElementException:
