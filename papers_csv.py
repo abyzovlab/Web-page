@@ -54,6 +54,7 @@ class MyNCBI:
                 
                 try:
                     pmid = docsum.find_element(By.XPATH, './span[@class="pmid"]').text.split()[-1]
+#                    sys.stderr.write("PMID is {pmid}\n".format(pmid=pmid))
                     year, paper = self.paper_from_pmid(pmid)
                     paper = paper.format(index=index, title=title, author=author)
                 except NoSuchElementException:
