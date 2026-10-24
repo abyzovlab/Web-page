@@ -100,7 +100,7 @@ for i in csv.reader(open("news.csv"), delimiter=";"):
     if (i[1] != ""):
         link = "<b>More: </b><a href='" + i[1] + "'>" + i[1] + "</a>"
     if (i[2] != ""):
-        img = "<img src='" + i[2] + "' class='w3-center' style='width:90%;'>"
+        img = "<img src='" + i[2] + "' class='w3-center' style='max-width:150px; width:90%; height:auto;'>"
     if pix < 4:
         news += temp_news.format(title=i[0], link=link, img=img, subtitle=i[3], footer=i[4], description=i[5])
     news_archive += "<li><b>{title}</b><br><i>{subtitle}</i><br> {description}<br>{img} {link}<br> {footer} <br><br>".format(
